@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Buy
+{% endblock %}
+
+{% block main %}
+    <form action="/sell" method="post">
+        <div class="form-group">
+            <select name="symbol" class="form-control">
+                {% if user_positions == [] %}
+                    <option disabled selected value="">Symbol</option>
+                {% else %}
+                    <option disabled selected value="">Symbol</option>
+                    {% for position in user_positions %}
+                        <option value="{{ position["symbol"] }}">{{ position["symbol"] }}</option>
+                    {% endfor %}
+                {% endif %}
+            </select>
+        </div>
+        <div class="form-group">
+            <input name="shares" class="form-control" type="text" placeholder="Shares"
+                autocomplete="off">
+        </div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+{% endblock %}

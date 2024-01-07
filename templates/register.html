@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+    <div>
+        <h1>Register</h1>
+    </div>
+    <form name="form" action="/register" method="post">
+        <div class="form-group">
+            <input name="username" class="form-control" type="text" placeholder="Username"
+                autocomplete="off" autofocus>
+        </div>
+        <p></p>
+        <div class="form-group">
+            <input name="password" class="form-control" type="password" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <input name="confirmation" class="form-control" type="password" placeholder="Confirm Password">
+        </div>
+        <button name="submitbtn" class="btn btn-primary" type="submit">Register</button>
+    </form>
+    <script>
+        document.querySelector("form").onsubmit = function(event) {
+            event.preventDefault();
+            let input = document.getElementsByName("username")[0].value;
+            $.get("/check?username=" + input, function(data) {
+                if (!data) {
+                    alert(data);
+                }
+                else {
+                    alert(data);
+                    document.querySelector("form").submit();
+                }
+            });
+        }
+    </script>
+{% endblock %}

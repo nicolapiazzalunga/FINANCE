@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+    {% if history == [] %}
+        <h1>Transaction history is empty</h1>
+    {% else %}
+        <h1>Transaction history</h1>
+        <div>
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        {% for key in history[0].keys() %}
+                            <th>{{ key|replace("_", " ")|capitalize }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for transaction in history %}
+                        <tr>
+                            {% for key in transaction %}
+                                <td>{{ transaction[key] }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+{% endblock%}

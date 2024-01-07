@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+    {% if portfolio == [] %}
+        <h1>Portfolio is empty</h1>
+    {% else %}
+        <h1>Portfolio</h1>
+        <div>
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        {% for key in portfolio[0].keys() %}
+                            <th>{{ key|replace("_", " ")|capitalize }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for position in portfolio %}
+                        <tr>
+                            {% for key in position %}
+                                <td>{{ position[key] }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot class="tfoot-dark">
+                    <tr>
+                        <td colspan="4">CASH</td>
+                        <td>{{ cash }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">GRAND TOTAL</td>
+                        <td>{{ grand_total }}</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    {% endif %}
+{% endblock%}
